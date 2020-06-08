@@ -22,7 +22,7 @@ export default function TvSeries() {
 export async function getServerSideProps(context) {
   const searchParam = context.params.id;
 
-  const url = [`http://omdbapi.com/?apikey=8ab88a20&t=${NEXT_PUBLIC_OMDB_API_KEY}`];
+  const url = [`http://omdbapi.com/?apikey=8ab88a20&t=${process.env.NEXT_PUBLIC_OMDB_API_KEY}`];
 
   const res = await fetch(url[0]);
   const tvSeries = await res.json();
@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
 
   const seasonUrl = [];
   for (let i = 1; i <= totalSeasons; i++) {
-    seasonUrl.push(`http://omdbapi.com/?apikey=${NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}&season=${i}`);
+    seasonUrl.push(`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}&season=${i}`);
   }
 
   await Promise.all(
