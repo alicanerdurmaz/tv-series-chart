@@ -21,11 +21,11 @@ function Header({ totalSeasons, selectedSeason, setSelectedSeason }) {
           padding: 0 1rem;
         }
         h1 {
-          font-size: 1.825rem;
+          font-size: 1.5rem;
           flex: 1;
         }
         span {
-          font-size: 1.825rem;
+          font-size: 1.5rem;
           font-weight: 300;
         }
       `}</style>

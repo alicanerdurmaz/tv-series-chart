@@ -21,6 +21,37 @@ function Chart({ seasonData, selectedSeason }) {
     }
   }
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+      const data = payload[0].payload;
+      return (
+        <div className='custom-tooltip'>
+          <p className='label'>{`${data.episodeWithSeason} : ${data.Title}`}</p>
+          <p className='rating'>
+            IMDb Rating : <span>{data.imdbRating}</span>
+          </p>
+          <p className='date'>{`Released : ${data.Released}`}</p>
+          <style jsx>{`
+            .custom-tooltip {
+              background: var(--bg-color);
+              padding: 0.5rem 1rem;
+              border-radius: 4px;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            }
+            p {
+              margin: 0.5rem 0;
+            }
+            span {
+              color: #43d8c9;
+            }
+          `}</style>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
       <div className='chart-container'>
@@ -36,7 +67,7 @@ function Chart({ seasonData, selectedSeason }) {
               domain={['dataMin', 'dataMax']}
               dataKey='imdbRating'
             />
-            <Tooltip />
+            <Tooltip content={<CustomTooltip />} />
             <Line
               animationDuration={600}
               type='monotone'
