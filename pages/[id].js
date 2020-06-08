@@ -1,10 +1,22 @@
-import Chart from '../components/tv-series/Chart';
-
+import { useState } from 'react';
+import Chart from '../components/Chart/Chart';
+import Header from '../components/Chart/Header';
+import seasonData from '../seasonData';
+import info from '../info';
 export default function TvSeries() {
+  const [selectedSeason, setSelectedSeason] = useState(0);
+
+  const fakeSeasonData = seasonData();
+  const fakeInfo = info();
+
   return (
     <>
       <div className='layout'>
-        <Chart></Chart>
+        <Header
+          totalSeasons={fakeInfo.totalSeasons}
+          setSelectedSeason={setSelectedSeason}
+          selectedSeason={selectedSeason}></Header>
+        <Chart seasonData={fakeSeasonData} selectedSeason={selectedSeason}></Chart>
       </div>
 
       <style jsx>{`
@@ -18,53 +30,49 @@ export default function TvSeries() {
     </>
   );
 }
+// export async function getServerSideProps(context) {
+//   // const searchParam = context.params.id;
+//   const searchParam = 'the big bang theory';
+//   const url = [`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}`];
 
-export async function getServerSideProps(context) {
-  const searchParam = context.params.id;
+//   const res = await fetch(url[0]);
+//   const tvSeries = await res.json();
+//   const totalSeasons = tvSeries.totalSeasons;
 
-  const url = [`http://omdbapi.com/?apikey=8ab88a20&t=${process.env.NEXT_PUBLIC_OMDB_API_KEY}`];
+//   const rawSeasonsData = [];
 
-  const res = await fetch(url[0]);
-  const tvSeries = await res.json();
-  const totalSeasons = tvSeries.totalSeasons;
+//   const seasonUrl = [];
+//   for (let i = 1; i <= totalSeasons; i++) {
+//     seasonUrl.push(`${url}&season=${i}`);
+//   }
 
-  const rawSeasonsData = [];
+//   await Promise.all(
+//     seasonUrl.map(async (seasonUrl) => {
+//       const response = await fetch(seasonUrl);
+//       const result = await response.json();
+//       rawSeasonsData.push(result);
+//     })
+//   );
 
-  const seasonUrl = [];
-  for (let i = 1; i <= totalSeasons; i++) {
-    seasonUrl.push(`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}&season=${i}`);
-  }
+//   function compare(a, b) {
+//     if (parseInt(a.Season) < parseInt(b.Season)) {
+//       return -1;
+//     }
+//     if (parseInt(a.Season) > parseInt(b.Season)) {
+//       return 1;
+//     }
+//     return 0;
+//   }
+//   rawSeasonsData.sort(compare);
 
-  await Promise.all(
-    seasonUrl.map(async (seasonUrl) => {
-      const response = await fetch(seasonUrl);
-      const result = await response.json();
-      rawSeasonsData.push(result);
-    })
-  );
+//   let counter = 1;
+//   rawSeasonsData.forEach((s) => {
+//     s.Episodes.forEach((e) => {
+//       e.episodeWithSeason = 'S' + s.Season + 'E' + e.Episode;
+//       e.episodeNumber = counter;
+//       counter++;
+//     });
+//   });
 
-  function compare(a, b) {
-    if (parseInt(a.Season) < parseInt(b.Season)) {
-      return -1;
-    }
-    if (parseInt(a.Season) > parseInt(b.Season)) {
-      return 1;
-    }
-    return 0;
-  }
-  rawSeasonsData.sort(compare);
-
-  const seasonData = [];
-
-  let counter = 1;
-  rawSeasonsData.forEach((s) => {
-    s.Episodes.forEach((e) => {
-      e.episodeWithSeason = 'S' + s.Season + 'E' + e.Episode;
-      e.episodeNumber = counter;
-      counter++;
-      seasonData.push(e);
-    });
-  });
-
-  return { props: { seasonData } };
-}
+//   return { props: { info: tvSeries, seasonData: rawSeasonsData } };
+// }
