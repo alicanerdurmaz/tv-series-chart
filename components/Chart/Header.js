@@ -1,7 +1,5 @@
 import React from 'react';
 import Dropdown from './Dropdown';
-import QuestionMark from './QuestionMark';
-import Search from './Search';
 
 function Header({ totalSeasons, selectedSeason, setSelectedSeason }) {
   return (
