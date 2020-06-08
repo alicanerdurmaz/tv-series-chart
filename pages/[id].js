@@ -23,7 +23,7 @@ export default function TvSeries() {
         .layout {
           height: 100%;
           display: grid;
-          grid-template-rows: 64px 1fr 32px;
+          grid-template-rows: 3rem 1fr 2rem;
           grid-template-areas: 'header' 'chart' 'footer';
         }
       `}</style>

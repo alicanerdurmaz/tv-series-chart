@@ -55,7 +55,6 @@ function Chart({ seasonData, selectedSeason }) {
             overflow: hidden;
             background-color: var(--bg-color-secondary);
             width: 100%;
-            border: 1px solid #00000085;
             border-left: none;
             border-right: none;
             height: 100%;
