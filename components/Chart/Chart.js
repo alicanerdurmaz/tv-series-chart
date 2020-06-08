@@ -5,7 +5,7 @@ function Chart({ seasonData, selectedSeason }) {
   const totalSeason = useRef(seasonData[0].totalSeasons);
 
   function filterData() {
-    if (selectedSeason === 0) {
+    if (parseInt(selectedSeason) === 0) {
       const newFilteredData = [];
       for (let i = 0; i < totalSeason.current; i++) {
         newFilteredData.push(...seasonData[i].Episodes);

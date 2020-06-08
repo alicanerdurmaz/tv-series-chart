@@ -1,8 +1,4 @@
-import React, { useRef } from 'react';
-
-function Dropdown({ totalSeasons, selectedSeason, setSelectedSeason }) {
-  const summaryRef = useRef(null);
-
+function Dropdown({ totalSeasons, setSelectedSeason }) {
   function createDropdownItem() {
     const liArray = [];
 
