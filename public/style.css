@@ -1,0 +1,35 @@
+:root {
+  --bg-color: #171c31;
+  --bg-color-secondary: #26304abe;
+  --text-color: #ffffff;
+  --text-color-secondary: #848c9c;
+  --primary-color: #834eff;
+  --secondary-color: #f65164;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background: var(--bg-color);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+#__next {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
