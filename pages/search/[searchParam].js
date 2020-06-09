@@ -75,6 +75,7 @@ export async function getServerSideProps(context) {
 
   if (searchResult.length === 1) {
     // go to page
+    // context.res.redirect(301, `/title/${searchResult[0].Title}`);
   }
   if (searchResult.Error) {
     // return series not found

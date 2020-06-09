@@ -2,25 +2,6 @@ import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, Responsi
 import { useRef } from 'react';
 
 function Chart({ seasonData, selectedSeason, scale }) {
-  const totalSeason = useRef(seasonData[0].totalSeasons);
-
-  function filterData() {
-    if (parseInt(selectedSeason) === 0) {
-      const newFilteredData = [];
-      for (let i = 0; i < totalSeason.current; i++) {
-        newFilteredData.push(...seasonData[i].Episodes);
-      }
-      return newFilteredData;
-    } else {
-      let counter = 1;
-      seasonData[selectedSeason - 1].Episodes.forEach((e) => {
-        e.episodeNumber = counter;
-        counter++;
-      });
-      return seasonData[selectedSeason - 1].Episodes;
-    }
-  }
-
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
       const data = payload[0].payload;
@@ -53,16 +34,21 @@ function Chart({ seasonData, selectedSeason, scale }) {
   };
 
   function calculateLeft() {
-    return scale ? -12 : -30;
+    return scale ? -20 : -30;
   }
 
   return (
     <>
       <div className='chart-container'>
-        <ResponsiveContainer width='100%' height='100%'>
-          <LineChart data={filterData()} margin={{ top: 34, right: 24, left: calculateLeft(), bottom: 8 }}>
+        <ResponsiveContainer width='100%' height='50%'>
+          <LineChart margin={{ top: 34, right: 24, left: calculateLeft(), bottom: 8 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} stroke='#848c9c8f' />
-            <XAxis dataKey='episodeNumber' tick={{ fill: '#848c9c8f' }} />
+            <XAxis
+              dataKey='episodeNumber'
+              tick={{ fill: '#848c9c8f' }}
+              type='category'
+              allowDuplicatedCategory={false}
+            />
             <YAxis
               tick={{ fill: '#848c9c8f' }}
               type='number'
@@ -71,14 +57,35 @@ function Chart({ seasonData, selectedSeason, scale }) {
               dataKey='imdbRating'
             />
             <Tooltip content={<CustomTooltip />} />
-            <Line
-              animationDuration={600}
-              type='monotone'
-              dataKey='imdbRating'
-              stroke='#43d8c9'
-              strokeWidth={1.5}
-              dot={{ stroke: '#171c31', strokeWidth: 0.5, fill: '#00bcd4' }}
-            />
+            {seasonData.map((s, i) => {
+              const color = i % 2 ? '#ff9999' : '#43d8c9';
+              if (parseInt(selectedSeason) === 0) {
+                return (
+                  <Line
+                    key={s.Season}
+                    data={s.Episodes}
+                    animationDuration={600}
+                    type='monotone'
+                    dataKey='imdbRating'
+                    stroke={color}
+                    strokeWidth={1.5}
+                    dot={{ stroke: '#171c31', strokeWidth: 1, fill: color, r: 3.5 }}></Line>
+                );
+              } else if (selectedSeason === s.Season) {
+                return (
+                  <Line
+                    key={s.Season}
+                    data={s.Episodes}
+                    animationDuration={600}
+                    type='monotone'
+                    dataKey='imdbRating'
+                    stroke='#43d8c9'
+                    strokeWidth={1.5}
+                    dot={{ stroke: '#171c31', strokeWidth: 1, fill: '#00bcd4', r: 5 }}
+                  />
+                );
+              }
+            })}
           </LineChart>
         </ResponsiveContainer>
 

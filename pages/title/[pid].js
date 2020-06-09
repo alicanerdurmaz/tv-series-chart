@@ -2,21 +2,23 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Chart from '../../components/Chart/Chart';
 import Header from '../../components/Chart/Header';
+import seasonData from '../../mockSeasonData.json';
+import info from '../../mockInfoData.json';
 
-export default function TvSeries({ info, seasonData, error }) {
+export default function TvSeries() {
   const router = useRouter();
 
   const [selectedSeason, setSelectedSeason] = useState(0);
-  const [scale, setScale] = useState(false);
+  const [scale, setScale] = useState(true);
 
   useEffect(() => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
 
-  if (error) {
-    return <h1>MOVIE NOT FOUND</h1>;
-  }
+  // if (error) {
+  //   return <h1>MOVIE NOT FOUND</h1>;
+  // }
   return (
     <>
       <div className='layout'>
@@ -56,54 +58,54 @@ export default function TvSeries({ info, seasonData, error }) {
     </>
   );
 }
-export async function getServerSideProps(context) {
-  const searchParam = context.params.pid;
+// export async function getServerSideProps(context) {
+//   const searchParam = context.params.pid;
 
-  const url = [`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}`];
+//   const url = [`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}`];
 
-  const res = await fetch(url);
-  const tvSeries = await res.json();
+//   const res = await fetch(url);
+//   const tvSeries = await res.json();
 
-  if (tvSeries.Error || tvSeries?.Type === 'movie') {
-    return { props: { error: 'Tv Series Not Found' } };
-  }
+//   if (tvSeries.Error || tvSeries?.Type === 'movie') {
+//     return { props: { error: 'Tv Series Not Found' } };
+//   }
 
-  const totalSeasons = tvSeries.totalSeasons;
+//   const totalSeasons = tvSeries.totalSeasons;
 
-  const rawSeasonsData = [];
+//   const rawSeasonsData = [];
 
-  const seasonUrl = [];
-  for (let i = 1; i <= totalSeasons; i++) {
-    seasonUrl.push(`${url}&season=${i}`);
-  }
+//   const seasonUrl = [];
+//   for (let i = 1; i <= totalSeasons; i++) {
+//     seasonUrl.push(`${url}&season=${i}`);
+//   }
 
-  await Promise.all(
-    seasonUrl.map(async (seasonUrl) => {
-      const response = await fetch(seasonUrl);
-      const result = await response.json();
-      rawSeasonsData.push(result);
-    })
-  );
+//   await Promise.all(
+//     seasonUrl.map(async (seasonUrl) => {
+//       const response = await fetch(seasonUrl);
+//       const result = await response.json();
+//       rawSeasonsData.push(result);
+//     })
+//   );
 
-  function compare(a, b) {
-    if (parseInt(a.Season) < parseInt(b.Season)) {
-      return -1;
-    }
-    if (parseInt(a.Season) > parseInt(b.Season)) {
-      return 1;
-    }
-    return 0;
-  }
-  rawSeasonsData.sort(compare);
+//   function compare(a, b) {
+//     if (parseInt(a.Season) < parseInt(b.Season)) {
+//       return -1;
+//     }
+//     if (parseInt(a.Season) > parseInt(b.Season)) {
+//       return 1;
+//     }
+//     return 0;
+//   }
+//   rawSeasonsData.sort(compare);
 
-  let counter = 1;
-  rawSeasonsData.forEach((s) => {
-    s.Episodes.forEach((e) => {
-      e.episodeWithSeason = 'S' + s.Season + 'E' + e.Episode;
-      e.episodeNumber = counter;
-      counter++;
-    });
-  });
+//   let counter = 1;
+//   rawSeasonsData.forEach((s) => {
+//     s.Episodes.forEach((e) => {
+//       e.episodeWithSeason = 'S' + s.Season + 'E' + e.Episode;
+//       e.episodeNumber = counter;
+//       counter++;
+//     });
+//   });
 
-  return { props: { info: tvSeries, seasonData: rawSeasonsData } };
-}
+//   return { props: { info: tvSeries, seasonData: rawSeasonsData } };
+// }
