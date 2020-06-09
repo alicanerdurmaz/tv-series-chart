@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Chart from '../../components/Chart/Chart';
 import Header from '../../components/Chart/Header';
 
 export default function TvSeries({ info, seasonData }) {
   const [selectedSeason, setSelectedSeason] = useState(0);
   const [scale, setScale] = useState(false);
+
+  useEffect(() => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, []);
 
   return (
     <>

@@ -5,6 +5,7 @@
   --text-color-secondary: #848c9c;
   --primary-color: #834eff;
   --secondary-color: #f65164;
+  --vh: 100vh;
 }
 
 html {
@@ -108,8 +109,12 @@ select::-ms-expand {
   html {
     transform: rotate(-90deg);
     transform-origin: left top;
+
     width: 100vh;
     height: 100vw;
+
+    width: calc(var(--vh, 1vh) * 100);
+
     overflow-x: hidden;
     position: absolute;
     top: 100%;

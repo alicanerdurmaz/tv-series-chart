@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 import ChangeScale from './ChangeScale';
+import Search from '../Home/Search';
 
 function Header({ info, selectedSeason, setSelectedSeason, scale, setScale }) {
   return (
@@ -8,7 +9,8 @@ function Header({ info, selectedSeason, setSelectedSeason, scale, setScale }) {
       <h1>
         {info.Title} | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
       </h1>
-      <ChangeScale scale={scale} setScale={setScale}></ChangeScale>
+      <ChangeScale scale={scale} setScale={setScale} />
+      <Search />
       <Dropdown
         totalSeasons={info.totalSeasons}
         setSelectedSeason={setSelectedSeason}
