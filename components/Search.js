@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Suggestions from './Suggestions';
 import useSarchInTitles from './helpers/useSearchInTitles';
 
 function Search({ styleName, positionTop }) {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
@@ -17,7 +19,7 @@ function Search({ styleName, positionTop }) {
 
   function submitHandler(e) {
     e.preventDefault();
-    alert('SEARCH NOT IMPLEMENTED YET = ' + searchTerm);
+    router.push('/search/' + searchTerm);
   }
 
   return (

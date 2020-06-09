@@ -30,6 +30,22 @@ export default function TvSeries({ info, seasonData }) {
           grid-template-rows: 2rem 1fr 2rem;
           grid-template-areas: 'header' 'chart' 'footer';
         }
+        @media screen and (min-width: 320px) and (max-width: 767px) {
+          .layout {
+            transform: rotate(-90deg);
+            transform-origin: left top;
+
+            width: 100vh;
+            height: 100vw;
+
+            width: calc(var(--vh, 1vh) * 100);
+
+            overflow-x: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+          }
+        }
       `}</style>
     </>
   );
