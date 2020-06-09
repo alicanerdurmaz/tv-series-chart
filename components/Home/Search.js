@@ -23,7 +23,7 @@ function Search() {
   }, [debouncedSearchTerm]);
 
   function searchInTitles() {
-    if (searchTerm.length < 3) return;
+    if (searchTerm.length < 1) return;
 
     function sortBy(a, b) {
       return a.length - b.length;
@@ -34,7 +34,7 @@ function Search() {
       }
     });
 
-    if (tempSuggestions.length < 15) {
+    if (tempSuggestions.length < 30) {
       if (tempSuggestions[0] === searchTerm) {
         {
           setSuggestions([]);

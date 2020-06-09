@@ -4,12 +4,18 @@ import Header from '../../components/Chart/Header';
 
 export default function TvSeries({ info, seasonData }) {
   const [selectedSeason, setSelectedSeason] = useState(0);
+  const [scale, setScale] = useState(false);
 
   return (
     <>
       <div className='layout'>
-        <Header info={info} setSelectedSeason={setSelectedSeason} selectedSeason={selectedSeason}></Header>
-        <Chart seasonData={seasonData} selectedSeason={selectedSeason}></Chart>
+        <Header
+          info={info}
+          setSelectedSeason={setSelectedSeason}
+          selectedSeason={selectedSeason}
+          scale={scale}
+          setScale={setScale}></Header>
+        <Chart scale={scale} seasonData={seasonData} selectedSeason={selectedSeason}></Chart>
       </div>
 
       <style jsx>{`
@@ -24,10 +30,11 @@ export default function TvSeries({ info, seasonData }) {
   );
 }
 export async function getServerSideProps(context) {
-  const searchParam = context.params.id;
+  const searchParam = context.params.pid;
+
   const url = [`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}`];
 
-  const res = await fetch(url[0]);
+  const res = await fetch(url);
   const tvSeries = await res.json();
 
   const totalSeasons = tvSeries.totalSeasons;

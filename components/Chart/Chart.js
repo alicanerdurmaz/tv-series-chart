@@ -1,7 +1,7 @@
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, ResponsiveContainer } from 'recharts';
 import { useRef } from 'react';
 
-function Chart({ seasonData, selectedSeason }) {
+function Chart({ seasonData, selectedSeason, scale }) {
   const totalSeason = useRef(seasonData[0].totalSeasons);
 
   function filterData() {
@@ -52,19 +52,22 @@ function Chart({ seasonData, selectedSeason }) {
     return null;
   };
 
+  function calculateLeft() {
+    return scale ? -12 : -30;
+  }
+
   return (
     <>
       <div className='chart-container'>
         <ResponsiveContainer width='100%' height='100%'>
-          <LineChart data={filterData()} margin={{ top: 34, right: 24, left: -24, bottom: 8 }}>
+          <LineChart data={filterData()} margin={{ top: 34, right: 24, left: calculateLeft(), bottom: 8 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} stroke='#848c9c8f' />
             <XAxis dataKey='episodeNumber' tick={{ fill: '#848c9c8f' }} />
             <YAxis
               tick={{ fill: '#848c9c8f' }}
               type='number'
-              interval={0}
-              ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-              domain={['dataMin', 'dataMax']}
+              ticks={scale ? null : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+              domain={scale ? ['auto', 'auto'] : null}
               dataKey='imdbRating'
             />
             <Tooltip content={<CustomTooltip />} />
