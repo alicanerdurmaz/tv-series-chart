@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import useDebounce from '../helpers/useDebounce';
 import tvTitles from './tv-titles';
 
 function Search() {
+  const router = useRouter();
   const inputRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -47,6 +49,11 @@ function Search() {
 
   function submitHandler(e) {
     e.preventDefault();
+    alert('SEARCH NOT IMPLEMENTED YET = ' + searchTerm);
+  }
+
+  function goTitle(e) {
+    router.push('/title/' + e.target.innerHTML);
   }
 
   return (
@@ -68,18 +75,13 @@ function Search() {
               <li
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    setSearchTerm(e.target.innerHTML);
-                    setSuggestions([]);
-                    inputRef.current.focus();
+                    goTitle(e);
                   }
                 }}
                 tabIndex='0'
                 className='list-item'
                 key={e}
-                onClick={(e) => {
-                  setSearchTerm(e.target.innerHTML);
-                  setSuggestions([]);
-                }}>
+                onClick={(e) => goTitle(e)}>
                 {e}
               </li>
             ))}

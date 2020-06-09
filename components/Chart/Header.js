@@ -1,14 +1,15 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 
-function Header({ totalSeasons, selectedSeason, setSelectedSeason }) {
+function Header({ info, selectedSeason, setSelectedSeason }) {
+  console.log(info);
   return (
     <div className='header-container'>
       <h1>
-        Big Bang Theory | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
+        {info.Title} | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
       </h1>
       <Dropdown
-        totalSeasons={totalSeasons}
+        totalSeasons={info.totalSeasons}
         setSelectedSeason={setSelectedSeason}
         selectedSeason={selectedSeason}></Dropdown>
       <style jsx>{`
