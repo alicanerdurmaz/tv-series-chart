@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Suggestions from './Suggestions';
 import useSarchInTitles from './helpers/useSearchInTitles';
 
-function Search({ styleName }) {
+function Search({ styleName, positionTop }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
@@ -31,7 +31,7 @@ function Search({ styleName }) {
         autoComplete='off'
         required
         onChange={(e) => setSearchTerm(e.target.value)}></input>
-      <Suggestions array={suggestions} width='90%' positionTop='4.5rem'></Suggestions>
+      <Suggestions array={suggestions} width='90%' positionTop={positionTop}></Suggestions>
     </form>
   );
 }

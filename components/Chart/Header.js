@@ -9,7 +9,7 @@ function Header({ info, selectedSeason, setSelectedSeason, scale, setScale }) {
       <h1>
         {info.Title} | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
       </h1>
-      <Search styleName='header'></Search>
+      <Search styleName='header' positionTop='2rem'></Search>
       <ChangeScale scale={scale} setScale={setScale} />
       <Dropdown
         totalSeasons={info.totalSeasons}

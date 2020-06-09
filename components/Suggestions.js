@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-export default function Suggestions({ array, positionTop = null, width = null }) {
+export default function Suggestions({ array, positionTop = null }) {
   if (!array) return null;
   if (array.length < 1) return null;
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function Suggestions({ array, positionTop = null, width = null })
   }
 
   return (
-    <ul style={{ top: positionTop, width: width }}>
+    <ul style={{ top: positionTop }}>
       {array.map((e) => (
         <li
           onKeyDown={(e) => {

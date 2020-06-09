@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className='container'>
       <h1>Tv Series Chart</h1>
-      <Search styleName='home' />
+      <Search styleName='home' positionTop='4rem' />
       <button>SEARCH</button>
       <style jsx>{`
         .container {
