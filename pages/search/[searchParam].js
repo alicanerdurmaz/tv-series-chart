@@ -1,8 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import Form from '../../components/Form';
 export default function SearchResult({ searchResult }) {
   return (
     <div>
+      <header>
+        <Form></Form>
+      </header>
       <ul>
         {searchResult.map((e) => {
           return (
@@ -17,6 +21,7 @@ export default function SearchResult({ searchResult }) {
       <style jsx>{`
         div {
           max-width: 1200px;
+          height: 100%;
           margin: 0 auto;
         }
         ul {
@@ -24,8 +29,8 @@ export default function SearchResult({ searchResult }) {
           width: 100%;
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          column-gap: 1rem;
-          row-gap: 1rem;
+          column-gap: 0.5rem;
+          row-gap: 0.5rem;
         }
         li {
           cursor: pointer;
@@ -39,9 +44,18 @@ export default function SearchResult({ searchResult }) {
           transition: all 190ms ease;
           border: 1px solid black;
           border-radius: 4px;
+					transform: scale(.9);
         }
         img:hover {
-          height: 475px;
+					transform:scale(1);
+        }
+        header {
+					max-width:800px;
+          margin:0 auto;
+					display: flex;
+					flex-direction column;
+					justify-content:center;
+					align-items:center;
         }
       `}</style>
     </div>

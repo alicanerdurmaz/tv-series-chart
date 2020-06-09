@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Chart from '../../components/Chart/Chart';
 import Header from '../../components/Chart/Header';
 
-export default function TvSeries({ info, seasonData }) {
+export default function TvSeries({ info, seasonData, error }) {
+  const router = useRouter();
+
   const [selectedSeason, setSelectedSeason] = useState(0);
   const [scale, setScale] = useState(false);
 
@@ -11,6 +14,9 @@ export default function TvSeries({ info, seasonData }) {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
 
+  if (error) {
+    return <h1>MOVIE NOT FOUND</h1>;
+  }
   return (
     <>
       <div className='layout'>
@@ -57,6 +63,10 @@ export async function getServerSideProps(context) {
 
   const res = await fetch(url);
   const tvSeries = await res.json();
+
+  if (tvSeries.Error || tvSeries?.Type === 'movie') {
+    return { props: { error: 'Tv Series Not Found' } };
+  }
 
   const totalSeasons = tvSeries.totalSeasons;
 
