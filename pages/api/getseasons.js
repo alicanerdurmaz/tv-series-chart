@@ -3,20 +3,21 @@ export default async (req, res) => {
 
   const url = [`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&t=${searchParam}`];
 
-  const response = await fetch(url);
-  const tvSeries = await response.json();
+  const response = await fetch(url + '&season=1');
+  const data = await response.json();
 
-  if (tvSeries.Error || tvSeries?.Type === 'movie') {
+  if (data.Error || data?.Type === 'movie') {
     return res.status(200).json({
       notFound: 'Tv Series Not Found',
     });
   }
-  const totalSeasons = tvSeries.totalSeasons;
+  const totalSeasons = data.totalSeasons;
 
   const rawSeasonsData = [];
+  rawSeasonsData.push(data);
 
   const seasonUrl = [];
-  for (let i = 1; i <= totalSeasons; i++) {
+  for (let i = 2; i <= totalSeasons; i++) {
     seasonUrl.push(`${url}&season=${i}`);
   }
 
@@ -48,5 +49,5 @@ export default async (req, res) => {
     });
   });
 
-  return res.status(200).json({ info: tvSeries, seasonData: rawSeasonsData });
+  return res.status(200).json({ seasonData: rawSeasonsData });
 };

@@ -1,29 +1,29 @@
 import React from 'react';
+import useFetch from '../components/helpers/useFetch';
 import Link from 'next/link';
-import Search from '../../components/Search';
+import { useRouter } from 'next/router';
+import Header from '../components/Chart/Header';
 
-export default function SearchResult() {
-  const searchResult = [
-    {
-      Title: 'The Big Bang Theory',
-      Year: '2007–2019',
-      imdbID: 'tt0898266',
-      Type: 'series',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BY2FmZTY5YTktOWRlYy00NmIyLWE0ZmQtZDg2YjlmMzczZDZiXkEyXkFqcGdeQXVyNjg4NzAyOTA@._V1_SX300.jpg',
-    },
-  ];
+export default function SearchPage() {
+  const router = useRouter();
+  const { data } = useFetch('/api/search');
 
+  if (!data) return <h1>Loading</h1>;
+
+  if (data.searchResult.length === 1) router.push('/chart?t=' + data.searchResult[0].Title);
+
+  if (data.notFound) {
+    return <h1>Bulunamadi</h1>;
+  }
+  console.log(data.searchResult);
   return (
-    <div>
-      <header>
-        <Search styleName='home' />
-      </header>
+    <div className='container'>
+      <Header></Header>
       <ul>
-        {searchResult.map((e) => {
+        {data.searchResult.map((e) => {
           return (
             <li key={e.imdbID}>
-              <Link href={`/title/${e.Title}`}>
+              <Link href={`/chart?t=${e.Title}`}>
                 <img src={e.Poster}></img>
               </Link>
             </li>
@@ -31,12 +31,13 @@ export default function SearchResult() {
         })}
       </ul>
       <style jsx>{`
-        div {
-          max-width: 1200px;
+        .container {
           height: 100%;
-          margin: 0 auto;
         }
+				
         ul {
+					max-width: 1200px;
+          margin: 0 auto;
           padding-top: 2rem;
           width: 100%;
           display: grid;

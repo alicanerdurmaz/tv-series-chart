@@ -19,7 +19,10 @@ function Search({ styleName, positionTop, refresh }) {
 
   function submitHandler(e) {
     e.preventDefault();
-    router.push('/search/' + searchTerm);
+    if (searchTerm.length < 1) {
+      return;
+    }
+    router.push('/search?s=' + searchTerm);
   }
 
   return (
@@ -36,7 +39,6 @@ function Search({ styleName, positionTop, refresh }) {
         placeholder='Search Tv Series'
         aria-label='search'
         autoComplete='off'
-        required
         onChange={(e) => setSearchTerm(e.target.value)}></input>
       <Suggestions array={suggestions} width='90%' positionTop={positionTop} refresh={refresh}></Suggestions>
     </form>

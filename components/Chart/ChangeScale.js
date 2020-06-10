@@ -11,10 +11,9 @@ const ChangeScale = ({ scale, setScale }) => {
           color: var(--text-color);
           font-size: 1rem;
           padding: 0.5rem 1rem;
-          margin: 0 2rem;
+          margin-right: 2rem;
           user-select: none;
-          font-family: Lato;
-          font-weight: 700;
+          font-weight: 600;
           border: none;
           background: var(--bg-color-secondary);
           border-radius: 4px;

@@ -1,37 +1,11 @@
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ResponsiveContainer } from 'recharts';
+import Dropdown from './Dropdown';
+import ChangeScale from './ChangeScale';
+import { useState } from 'react';
 
-function Chart({ seasonData, selectedSeason, scale }) {
-  const CustomTooltip = ({ active, payload }) => {
-    if (!payload) return null;
-    if (active) {
-      const data = payload[0].payload;
-      return (
-        <div className='custom-tooltip'>
-          <p className='label'>{`${data.episodeWithSeason} : ${data.Title}`}</p>
-          <p className='rating'>
-            IMDb Rating : <span>{data.imdbRating}</span>
-          </p>
-          <p className='date'>{`Released : ${data.Released}`}</p>
-          <style jsx>{`
-            .custom-tooltip {
-              background: var(--bg-color);
-              padding: 0.5rem 1rem;
-              border-radius: 4px;
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            }
-            p {
-              margin: 0.5rem 0;
-            }
-            span {
-              color: #43d8c9;
-            }
-          `}</style>
-        </div>
-      );
-    }
-
-    return null;
-  };
+function Chart({ seasonData }) {
+  const [selectedSeason, setSelectedSeason] = useState(0);
+  const [scale, setScale] = useState(true);
 
   function calculateLeft() {
     return scale ? -20 : -30;
@@ -40,8 +14,12 @@ function Chart({ seasonData, selectedSeason, scale }) {
   return (
     <>
       <div className='chart-container'>
-        <ResponsiveContainer width='100%' height='50%'>
-          <LineChart margin={{ top: 34, right: 24, left: calculateLeft(), bottom: 8 }}>
+        <div className='chart-header'>
+          <ChangeScale scale={scale} setScale={setScale} />
+          <Dropdown setSelectedSeason={setSelectedSeason} selectedSeason={selectedSeason}></Dropdown>
+        </div>
+        <ResponsiveContainer width='100%' height='100%'>
+          <LineChart margin={{ top: 20, right: 24, left: calculateLeft(), bottom: 8 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} stroke='#848c9c8f' />
             <XAxis
               dataKey='episodeNumber'
@@ -94,13 +72,20 @@ function Chart({ seasonData, selectedSeason, scale }) {
             grid-area: chart;
             margin: 0 auto;
             overflow: hidden;
-            background-color: var(--bg-color-secondary);
-            width: 100%;
-            border-left: none;
-            border-right: none;
+            background: var(--bg-color-secondary);
+            background: var(--bg-color-gradient);
+            width: 97%;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             height: 100%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07),
-              0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+            display: flex;
+            flex-direction: column;
+          }
+          .chart-header {
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
           }
         `}</style>
       </div>
@@ -109,3 +94,35 @@ function Chart({ seasonData, selectedSeason, scale }) {
 }
 
 export default Chart;
+
+function CustomTooltip({ active, payload }) {
+  if (!payload) return null;
+  if (active) {
+    const data = payload[0].payload;
+    return (
+      <div className='custom-tooltip'>
+        <p className='label'>{`${data.episodeWithSeason} : ${data.Title}`}</p>
+        <p className='rating'>
+          IMDb Rating : <span>{data.imdbRating}</span>
+        </p>
+        <p className='date'>{`Released : ${data.Released}`}</p>
+        <style jsx>{`
+          .custom-tooltip {
+            background: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          }
+          p {
+            margin: 0.5rem 0;
+          }
+          span {
+            color: #43d8c9;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  return null;
+}

@@ -12,12 +12,14 @@ export default function Suggestions({ array, positionTop = null, refresh = false
       {array.map((e) => (
         <li
           key={e}
-          onClick={() => {
+          onClick={(event) => {
             if (refresh) {
               router.push('/chart?t=' + e);
               setTimeout(() => {
                 router.reload('/chart?t=' + e);
               }, 20);
+            } else {
+              event.currentTarget.nextSibling?.firstChild?.click();
             }
           }}
           onKeyDown={(event) => {
@@ -40,12 +42,16 @@ export default function Suggestions({ array, positionTop = null, refresh = false
           text-decoration: none;
         }
         ul {
-          background: var(--bg-color);
+          background: var(--bg-color-secondary);
+          border-radius: 4px;
           position: absolute;
           z-index: 2;
           display: flex;
           flex-direction: column;
-          border: 1px solid black;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border: 1px solid var(--border-color);
+          border-top: 0;
           margin: 0 auto;
           left: 0;
           right: 0;

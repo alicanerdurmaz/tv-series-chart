@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 function useFetch(url) {
-  const [data, setData] = useState(undefined);
-  const [error, setError] = useState(undefined);
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
+    setLoading(true);
     fetchData();
   }, []);
 
@@ -13,12 +16,13 @@ function useFetch(url) {
       const response = await fetch(url + window.location.search);
       const data = await response.json();
       setData(data);
+      setLoading(false);
     } catch (err) {
-      setError(err);
+      router.push('/404');
     }
   }
 
-  return { data, error };
+  return { data, isLoading };
 }
 
 export default useFetch;

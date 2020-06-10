@@ -1,28 +1,30 @@
 :root {
-  --bg-color: #212121;
-  --bg-color-secondary: #202225;
+  --bg-color: #000000;
+  --bg-color-secondary: #1f1f1f;
+  --bg-color-gradient: radial-gradient(70% 70% at 50% 100%, #1f1f1f 0, #111 100%);
   --text-color: #d9d9d9;
-  --text-color-secondary: #848c9c;
+  --text-color-secondary: #888888;
   --primary-color: #834eff;
   --secondary-color: #f65164;
+  --border-color: #333;
 
   --vh: 100vh;
 }
 html {
   font-size: 16px;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  text-rendering: optimizeLegibility !important;
 }
 
 html,
 body {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
   background: var(--bg-color);
   padding: 0;
   margin: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1;
 }
@@ -31,6 +33,10 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 *,
@@ -51,6 +57,7 @@ li,
 span,
 select,
 option {
+  font-weight: 400;
   margin: 0;
   padding: 0;
   color: var(--text-color);
@@ -72,8 +79,8 @@ select {
   -webkit-appearance: none;
   appearance: none;
   user-select: none;
-  font-family: Lato;
-  font-weight: 700;
+  font-family: Inter;
+  font-weight: 600;
   border: none;
   background: var(--bg-color-secondary);
   border-radius: 4px;
@@ -88,7 +95,6 @@ select::-ms-expand {
   padding-bottom: 0.5rem;
   padding-right: 2rem;
   padding-left: 1rem;
-
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
     linear-gradient(to bottom, #292b2f 0%, #292b2f 100%);
   background-repeat: no-repeat, repeat;
@@ -101,17 +107,18 @@ select::-ms-expand {
 .header-form {
   position: relative;
   margin-left: 2rem;
-  flex: 1;
+  flex: 0.5;
 }
 .header-input {
-  padding: 0.225rem 1rem;
+  padding: 0.5rem 1rem;
   width: 100%;
-  background: var(--bg-color-secondary);
+  background: var(--bg-color);
   border: none;
   outline: none;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 1rem;
   color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 .header-input:focus,
 .header-input:active {

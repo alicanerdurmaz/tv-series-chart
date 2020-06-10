@@ -1,30 +1,31 @@
 import React from 'react';
-import Dropdown from './Dropdown';
-import ChangeScale from './ChangeScale';
 import Search from '../Search';
+import Link from 'next/link';
 
-function Header({ info, selectedSeason, setSelectedSeason, scale, setScale }) {
+function Header({ refresh }) {
   return (
     <div className='header-container'>
       <h1>
-        {info?.Title} | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
+        <Link href='/'>
+          <a>Tv Series Chart</a>
+        </Link>
       </h1>
-      <Search styleName='header' positionTop='2rem' refresh={true}></Search>
-      <ChangeScale scale={scale} setScale={setScale} />
-      <Dropdown
-        totalSeasons={info?.totalSeasons}
-        setSelectedSeason={setSelectedSeason}
-        selectedSeason={selectedSeason}></Dropdown>
+      <Search styleName='header' positionTop='2.225rem' refresh={true}></Search>
       <style jsx>{`
         .header-container {
+          height: 4rem;
           position: relative;
           grid-area: header;
           display: flex;
           align-items: center;
           padding: 0 1rem;
+          box-shadow: inset 0 -1px var(--border-color);
         }
         h1 {
+          color: #fff;
           font-size: 1.5rem;
+          font-weight: 700;
+          flex: 1;
         }
         span {
           font-size: 1.5rem;
