@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react';
 import Chart from '../components/Chart/Chart';
 import Header from '../components/Chart/Header';
+import Description from '../components/Chart/Description';
 import useFetch from '../components/helpers/useFetch';
 
 export default function ChartPage() {
-  const responseSeasonData = useFetch('/api/getseasons');
-
+  const responseSeason = useFetch('/api/getseasons');
+  const responseInfo = useFetch('/api/getinfo');
+  console.log(responseInfo);
   return (
     <>
       <div className='layout'>
         <Header refresh={true}></Header>
-        {responseSeasonData.isLoading ? (
-          <h1>YÜKLENİYOOO</h1>
-        ) : (
-          <Chart seasonData={responseSeasonData?.data?.seasonData}></Chart>
-        )}
+        <Description info={responseInfo?.data?.info}></Description>
+        <Chart seasonData={responseSeason?.data?.seasonData}></Chart>
       </div>
 
       <style jsx>{`

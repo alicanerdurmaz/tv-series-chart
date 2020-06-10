@@ -3,7 +3,7 @@ import Dropdown from './Dropdown';
 import ChangeScale from './ChangeScale';
 import { useState } from 'react';
 
-function Chart({ seasonData }) {
+const Chart = React.memo(function Chart({ seasonData }) {
   const [selectedSeason, setSelectedSeason] = useState(0);
   const [scale, setScale] = useState(true);
 
@@ -91,7 +91,7 @@ function Chart({ seasonData }) {
       </div>
     </>
   );
-}
+});
 
 export default Chart;
 
