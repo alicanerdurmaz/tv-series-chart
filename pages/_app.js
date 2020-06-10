@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import '../public/style.css';
+import { DataContextProvider } from '../components/context/DataContext';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -12,7 +13,9 @@ export default function App({ Component, pageProps }) {
           href='https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap'
           rel='stylesheet'></link>
       </Head>
-      <Component {...pageProps} />
+      <DataContextProvider>
+        <Component {...pageProps} />
+      </DataContextProvider>
     </>
   );
 }

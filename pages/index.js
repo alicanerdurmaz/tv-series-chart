@@ -1,8 +1,9 @@
-import Form from '../components/Form';
+import Search from '../components/Search';
 export default function Home() {
   return (
     <div className='container'>
-      <Form></Form>
+      <h1>Tv Series Chart</h1>
+      <Search styleName='home' positionTop='4.5rem' />
       <style jsx>
         {`
           .container {
@@ -13,6 +14,10 @@ export default function Home() {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+          }
+          h1 {
+            font-size: 3rem;
+            color: var(--secondary-color);
           }
         `}
       </style>

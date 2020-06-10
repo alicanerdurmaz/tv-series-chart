@@ -1,11 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
-import Form from '../../components/Form';
-export default function SearchResult({ searchResult }) {
+import Search from '../../components/Search';
+
+export default function SearchResult() {
+  const searchResult = [
+    {
+      Title: 'The Big Bang Theory',
+      Year: '2007–2019',
+      imdbID: 'tt0898266',
+      Type: 'series',
+      Poster:
+        'https://m.media-amazon.com/images/M/MV5BY2FmZTY5YTktOWRlYy00NmIyLWE0ZmQtZDg2YjlmMzczZDZiXkEyXkFqcGdeQXVyNjg4NzAyOTA@._V1_SX300.jpg',
+    },
+  ];
+
   return (
     <div>
       <header>
-        <Form></Form>
+        <Search styleName='home' />
       </header>
       <ul>
         {searchResult.map((e) => {
@@ -60,26 +72,4 @@ export default function SearchResult({ searchResult }) {
       `}</style>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const searchParam = context.params.searchParam;
-
-  console.log(searchParam);
-  const url = [`http://omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&s=${searchParam}`];
-
-  const response = await fetch(url);
-  const rawSearchResult = await response.json();
-
-  const searchResult = rawSearchResult.Search.filter((e) => e.Type === 'series');
-
-  if (searchResult.length === 1) {
-    // go to page
-    // context.res.redirect(301, `/title/${searchResult[0].Title}`);
-  }
-  if (searchResult.Error) {
-    // return series not found
-  }
-
-  return { props: { searchResult } };
 }

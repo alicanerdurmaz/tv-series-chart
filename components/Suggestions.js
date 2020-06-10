@@ -1,32 +1,34 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Suggestions({ array, positionTop = null }) {
   if (!array) return null;
   if (array.length < 1) return null;
-  const router = useRouter();
-
-  function goTitle(e) {
-    router.push('/title/' + e.target.innerHTML);
-  }
 
   return (
     <ul style={{ top: positionTop }}>
       {array.map((e) => (
         <li
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              goTitle(e);
-            }
-          }}
-          tabIndex='0'
           key={e}
-          onClick={(e) => goTitle(e)}>
-          {e}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowDown') {
+              e.currentTarget.nextSibling?.firstChild?.focus();
+            }
+            if (e.key === 'ArrowUp') {
+              e.currentTarget.previousSibling?.firstChild?.focus();
+            }
+          }}>
+          <Link href='/title/[pid]' as={`/title/${e}`}>
+            <a>{e}</a>
+          </Link>
         </li>
       ))}
 
       <style jsx>{`
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
         ul {
           background: var(--bg-color);
           position: absolute;

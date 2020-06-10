@@ -1,8 +1,7 @@
-import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, ResponsiveContainer } from 'recharts';
-import { useRef } from 'react';
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ResponsiveContainer } from 'recharts';
 
 function Chart({ seasonData, selectedSeason, scale }) {
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active) {
       const data = payload[0].payload;
       return (
