@@ -1,13 +1,13 @@
 :root {
-  --bg-color: #202225;
-  --bg-color-secondary: #292b2f;
+  --bg-color: #212121;
+  --bg-color-secondary: #202225;
   --text-color: #d9d9d9;
   --text-color-secondary: #848c9c;
   --primary-color: #834eff;
   --secondary-color: #f65164;
+
   --vh: 100vh;
 }
-
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased !important;

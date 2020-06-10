@@ -7,12 +7,12 @@ function Header({ info, selectedSeason, setSelectedSeason, scale, setScale }) {
   return (
     <div className='header-container'>
       <h1>
-        {info.Title} | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
+        {info?.Title} | <span>{parseInt(selectedSeason) === 0 ? `All Seasons` : `Season ${selectedSeason}`}</span>
       </h1>
-      <Search styleName='header' positionTop='2rem'></Search>
+      <Search styleName='header' positionTop='2rem' refresh={true}></Search>
       <ChangeScale scale={scale} setScale={setScale} />
       <Dropdown
-        totalSeasons={info.totalSeasons}
+        totalSeasons={info?.totalSeasons}
         setSelectedSeason={setSelectedSeason}
         selectedSeason={selectedSeason}></Dropdown>
       <style jsx>{`

@@ -2,6 +2,7 @@ import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ResponsiveContai
 
 function Chart({ seasonData, selectedSeason, scale }) {
   const CustomTooltip = ({ active, payload }) => {
+    if (!payload) return null;
     if (active) {
       const data = payload[0].payload;
       return (
@@ -56,7 +57,7 @@ function Chart({ seasonData, selectedSeason, scale }) {
               dataKey='imdbRating'
             />
             <Tooltip content={<CustomTooltip />} />
-            {seasonData.map((s, i) => {
+            {seasonData?.map((s, i) => {
               const color = i % 2 ? '#ff9999' : '#43d8c9';
               if (parseInt(selectedSeason) === 0) {
                 return (

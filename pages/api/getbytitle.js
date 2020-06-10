@@ -7,9 +7,10 @@ export default async (req, res) => {
   const tvSeries = await response.json();
 
   if (tvSeries.Error || tvSeries?.Type === 'movie') {
-    return res.status(404).json({ error: 'Tv Series Not Found' });
+    return res.status(200).json({
+      notFound: 'Tv Series Not Found',
+    });
   }
-
   const totalSeasons = tvSeries.totalSeasons;
 
   const rawSeasonsData = [];
@@ -22,8 +23,8 @@ export default async (req, res) => {
   await Promise.all(
     seasonUrl.map(async (seasonUrl) => {
       const response = await fetch(seasonUrl);
-      const result = await response.json();
-      rawSeasonsData.push(result);
+      const data = await response.json();
+      rawSeasonsData.push(data);
     })
   );
 

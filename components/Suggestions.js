@@ -1,24 +1,34 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-export default function Suggestions({ array, positionTop = null }) {
+export default function Suggestions({ array, positionTop = null, refresh = false }) {
   if (!array) return null;
   if (array.length < 1) return null;
+  const router = useRouter();
 
   return (
     <ul style={{ top: positionTop }}>
       {array.map((e) => (
         <li
           key={e}
-          onKeyDown={(e) => {
-            if (e.key === 'ArrowDown') {
-              e.currentTarget.nextSibling?.firstChild?.focus();
+          onClick={() => {
+            if (refresh) {
+              router.push('/chart?t=' + e);
+              setTimeout(() => {
+                router.reload('/chart?t=' + e);
+              }, 20);
             }
-            if (e.key === 'ArrowUp') {
-              e.currentTarget.previousSibling?.firstChild?.focus();
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowDown') {
+              event.currentTarget.nextSibling?.firstChild?.focus();
+            }
+            if (event.key === 'ArrowUp') {
+              event.currentTarget.previousSibling?.firstChild?.focus();
             }
           }}>
-          <Link href='/title/[pid]' as={`/title/${e}`}>
+          <Link href={{ pathname: '/chart', query: { t: e } }}>
             <a>{e}</a>
           </Link>
         </li>
@@ -48,7 +58,10 @@ export default function Suggestions({ array, positionTop = null }) {
           border-bottom: 1px solid var(--bg-color-secondary);
         }
         li:hover {
-          background: var(--bg-color-secondary);
+          background: #393e46;
+        }
+        li:focus-within {
+          background: #393e46;
         }
       `}</style>
     </ul>

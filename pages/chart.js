@@ -1,18 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Chart from '../../components/Chart/Chart';
-import Header from '../../components/Chart/Header';
-import seasonData from '../../mockSeasonData.json';
-import info from '../../mockInfoData.json';
-import { UseDataContext } from '../../components/context/DataContext';
 
-export default function TvSeries() {
-  const router = useRouter();
-  const { data, setData } = UseDataContext();
+import Chart from '../components/Chart/Chart';
+import Header from '../components/Chart/Header';
+import useFetch from '../components/helpers/useFetch';
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+export default function ChartPage() {
+  const { data, error } = useFetch('/api/getbytitle');
 
   const [selectedSeason, setSelectedSeason] = useState(0);
   const [scale, setScale] = useState(true);
@@ -22,16 +15,21 @@ export default function TvSeries() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
 
+  if (data && data.notFound) {
+    return <h1>Bulunamadi</h1>;
+  }
+
   return (
     <>
       <div className='layout'>
         <Header
-          info={info}
+          refresh={true}
+          info={data ? data.info : null}
           setSelectedSeason={setSelectedSeason}
           selectedSeason={selectedSeason}
           scale={scale}
           setScale={setScale}></Header>
-        <Chart scale={scale} seasonData={seasonData} selectedSeason={selectedSeason}></Chart>
+        <Chart scale={scale} seasonData={data ? data.seasonData : null} selectedSeason={selectedSeason}></Chart>
       </div>
 
       <style jsx>{`
