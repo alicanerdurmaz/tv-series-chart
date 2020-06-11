@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import '../public/style.css';
 import { DataContextProvider } from '../components/context/DataContext';
+import Footer from '../components/Footer';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <DataContextProvider>
         <Component {...pageProps} />
+        <Footer />
       </DataContextProvider>
     </>
   );

@@ -20,8 +20,8 @@ export default function ChartPage() {
       <style jsx>{`
         .layout {
           display: grid;
-          grid-template-rows: 4rem 1fr 360px 2rem;
-          grid-template-areas: 'header' 'description' 'chart' 'footer';
+          grid-template-rows: 4rem 1fr 360px;
+          grid-template-areas: 'header' 'description' 'chart';
         }
       `}</style>
     </>
