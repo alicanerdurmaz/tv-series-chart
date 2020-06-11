@@ -22,7 +22,7 @@ function Header({ refresh }) {
           box-shadow: inset 0 -1px var(--border-color);
         }
         h1 {
-          color: #fff;
+          color: var(--text-color);
           font-size: 1.5rem;
           font-weight: 700;
           flex: 1;

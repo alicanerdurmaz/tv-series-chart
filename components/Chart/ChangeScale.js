@@ -15,9 +15,10 @@ const ChangeScale = ({ scale, setScale }) => {
           user-select: none;
           font-weight: 600;
           border: none;
-          background: var(--bg-color-secondary);
+          background: #292b2f;
           border-radius: 4px;
           outline: none;
+          font-family: 'Inter';
         }
       `}</style>
     </>

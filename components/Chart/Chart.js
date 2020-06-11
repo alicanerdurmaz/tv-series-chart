@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ResponsiveContainer } from 'recharts';
 import Dropdown from './Dropdown';
 import ChangeScale from './ChangeScale';
-import { useState } from 'react';
 
 const Chart = React.memo(function Chart({ seasonData }) {
   const [selectedSeason, setSelectedSeason] = useState(0);
@@ -35,7 +35,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
               dataKey='imdbRating'
             />
             <Tooltip content={<CustomTooltip />} />
-            {seasonData?.map((s, i) => {
+            {seasonData.map((s, i) => {
               const color = i % 2 ? '#ff9999' : '#43d8c9';
               if (parseInt(selectedSeason) === 0) {
                 return (
@@ -71,10 +71,10 @@ const Chart = React.memo(function Chart({ seasonData }) {
           .chart-container {
             grid-area: chart;
             margin: 0 auto;
-            overflow: hidden;
+            overflow-x: hidden;
             background: var(--bg-color-secondary);
             background: var(--bg-color-gradient);
-            width: 97%;
+            width: 95%;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             height: 100%;

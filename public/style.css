@@ -1,6 +1,6 @@
 :root {
   --bg-color: #000000;
-  --bg-color-secondary: #1f1f1f;
+  --bg-color-secondary: #111111;
   --bg-color-gradient: radial-gradient(70% 70% at 50% 100%, #1f1f1f 0, #111 100%);
   --text-color: #d9d9d9;
   --text-color-secondary: #888888;
@@ -149,9 +149,9 @@ select::-ms-expand {
   border: 1px solid var(--secondary-color);
 }
 
-@media only screen and (max-width: 550px) {
-  html,
-  body {
-    font-size: 8px;
-  }
+.fw-600 {
+  font-weight: 600;
+}
+.color-yellow {
+  color: #fbd46d;
 }
