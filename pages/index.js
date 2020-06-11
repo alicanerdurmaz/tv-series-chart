@@ -12,6 +12,7 @@ const titleArray = [
 ];
 export default function Home() {
   const [selectedTitle, setSelectedTitle] = useState(1);
+  const [searchResult, setSearchResult] = useState(null);
   const titleRef = useRef(null);
 
   useInterval(() => {
@@ -26,11 +27,11 @@ export default function Home() {
     <div className='container'>
       <main>
         <h1>Tv Series Chart</h1>
-        <Search styleName='home' positionTop='4.5rem' />
+        <Search styleName='home' positionTop='4.5rem' setSearchResult={setSearchResult} />
 
-        <div className='info'>
+        <div className='suggestion'>
           Or Try : &nbsp;
-          <Link href={`/chart/big bang theory`} prefetch={false}>
+          <Link href={`/chart/${titleArray[selectedTitle % 5]}`} prefetch={false}>
             <a>
               <span className='title' ref={titleRef}>
                 {titleArray[selectedTitle % 5]}
@@ -60,7 +61,7 @@ export default function Home() {
             font-weight: 700;
             color: var(--secondary-color);
           }
-          .info {
+          .suggestion {
             color: #fff;
             margin: 0 auto;
             padding-left: 4rem;

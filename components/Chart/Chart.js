@@ -10,7 +10,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
   function calculateLeft() {
     return scale ? -20 : -30;
   }
-  console.log(seasonData);
+
   return (
     <>
       <div className='chart-container'>
@@ -74,13 +74,13 @@ const Chart = React.memo(function Chart({ seasonData }) {
           .chart-container {
             grid-area: chart;
             margin: 0 auto;
-            overflow-x: hidden;
+            overflow: hidden;
             background: var(--bg-color-secondary);
             background: var(--bg-color-gradient);
             width: 97%;
+            height: 100%;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            height: 100%;
             display: flex;
             flex-direction: column;
           }
