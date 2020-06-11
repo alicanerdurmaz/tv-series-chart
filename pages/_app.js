@@ -15,9 +15,11 @@ export default function App({ Component, pageProps }) {
           rel='stylesheet'></link>
       </Head>
       <DataContextProvider>
-        <Component {...pageProps} />
+        <Component {...pageProps}></Component>
         <Footer />
       </DataContextProvider>
+
+      <style jsx>{``}</style>
     </>
   );
 }

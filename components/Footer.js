@@ -34,13 +34,9 @@ export default function Footer() {
       </a>
       <style jsx>{`
         div {
-          width: 100%;
-          position: fixed;
-          left: 0;
-          bottom: 0;
+          margin-top: auto;
           height: 2rem;
           width: 100%;
-
           display: flex;
           justify-content: flex-end;
           align-items: center;

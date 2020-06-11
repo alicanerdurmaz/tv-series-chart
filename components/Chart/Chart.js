@@ -10,7 +10,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
   function calculateLeft() {
     return scale ? -20 : -30;
   }
-
+  console.log(seasonData);
   return (
     <>
       <div className='chart-container'>
@@ -25,7 +25,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
           <LineChart margin={{ top: 20, right: 24, left: calculateLeft(), bottom: 8 }}>
             <CartesianGrid strokeDasharray='3 3' vertical={false} stroke='#848c9c8f' />
             <XAxis
-              dataKey='episodeNumber'
+              dataKey={selectedSeason === 0 ? 'episodeNumber' : 'episodeWithSeason'}
               tick={{ fill: '#848c9c8f' }}
               type='category'
               allowDuplicatedCategory={false}
@@ -33,6 +33,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
             <YAxis
               tick={{ fill: '#848c9c8f' }}
               type='number'
+              interval='preserveStartEnd'
               ticks={scale ? null : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               domain={scale ? ['auto', 'auto'] : null}
               dataKey='imdbRating'
