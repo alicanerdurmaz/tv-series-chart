@@ -10,7 +10,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
   function calculateLeft() {
     return scale ? -20 : -30;
   }
-
+  console.log(seasonData);
   return (
     <>
       <div className='chart-container'>

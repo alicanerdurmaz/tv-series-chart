@@ -67,6 +67,10 @@ ol,
 ul {
   list-style: none;
 }
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
 /* select,
 option {
   -webkit-appearance: none;

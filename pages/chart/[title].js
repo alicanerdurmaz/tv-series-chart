@@ -9,11 +9,11 @@ export default function ChartPage() {
   const { data: info, isLoading: infoIsLoading } = useFetch('/api/getinfo?t=');
   const gridRef = useRef(null);
 
-  useEffect(() => {
-    if (!seasonDataIsLoading) {
-      gridRef.current.style.gridTemplateRows = '4rem auto 1fr 2rem';
-    }
-  }, [seasonDataIsLoading]);
+  // useEffect(() => {
+  //   if (!seasonDataIsLoading) {
+  //     gridRef.current.style.gridTemplateRows = '4rem auto 1fr 2rem';
+  //   }
+  // }, [seasonDataIsLoading]);
 
   return (
     <>
