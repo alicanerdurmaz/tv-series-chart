@@ -16,7 +16,10 @@ const Chart = React.memo(function Chart({ seasonData }) {
       <div className='chart-container'>
         <div className='chart-header'>
           <ChangeScale scale={scale} setScale={setScale} />
-          <Dropdown setSelectedSeason={setSelectedSeason} selectedSeason={selectedSeason}></Dropdown>
+          <Dropdown
+            setSelectedSeason={setSelectedSeason}
+            selectedSeason={selectedSeason}
+            totalSeasons={seasonData[0].totalSeasons}></Dropdown>
         </div>
         <ResponsiveContainer width='100%' height='100%'>
           <LineChart margin={{ top: 20, right: 24, left: calculateLeft(), bottom: 8 }}>
@@ -74,7 +77,7 @@ const Chart = React.memo(function Chart({ seasonData }) {
             overflow-x: hidden;
             background: var(--bg-color-secondary);
             background: var(--bg-color-gradient);
-            width: 95%;
+            width: 97%;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             height: 100%;

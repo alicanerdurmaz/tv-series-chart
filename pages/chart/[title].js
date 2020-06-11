@@ -1,12 +1,12 @@
-import Chart from '../components/Chart/Chart';
-import Header from '../components/Chart/Header';
-import Description from '../components/Chart/Description';
-import useFetch from '../components/helpers/useFetch';
+import Chart from '../../components/Chart/Chart';
+import Header from '../../components/Chart/Header';
+import Description from '../../components/Chart/Description';
+import useFetch from '../../components/helpers/useFetch';
 import { useEffect, useRef } from 'react';
 
 export default function ChartPage() {
-  const { data: seasonData, isLoading: seasonDataIsLoading } = useFetch('/api/getseasons');
-  const { data: info, isLoading: infoIsLoading } = useFetch('/api/getinfo');
+  const { data: seasonData, isLoading: seasonDataIsLoading } = useFetch('/api/getseasons?t=');
+  const { data: info, isLoading: infoIsLoading } = useFetch('/api/getinfo?t=');
   const gridRef = useRef(null);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function ChartPage() {
       gridRef.current.style.gridTemplateRows = '4rem auto 1fr 2rem';
     }
   }, [seasonDataIsLoading]);
+
   return (
     <>
       <div className='layout' ref={gridRef}>

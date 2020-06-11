@@ -13,7 +13,7 @@ function useFetch(url) {
 
   async function fetchData() {
     try {
-      const response = await fetch(url + window.location.search);
+      const response = await fetch(url + window.location.pathname.split('/')[2]);
       const data = await response.json();
       setData(data);
       setLoading(false);

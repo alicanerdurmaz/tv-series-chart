@@ -1,20 +1,25 @@
 import React from 'react';
-import useFetch from '../components/helpers/useFetch';
+import useFetch from '../../components/helpers/useFetch';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Header from '../components/Chart/Header';
+import Header from '../../components/Chart/Header';
 
 export default function SearchPage() {
   const router = useRouter();
-  const { data } = useFetch('/api/search');
+  const { data } = useFetch('/api/search?s=');
 
   if (!data) return <h1>Loading</h1>;
 
-  if (data.searchResult.length === 1) router.push('/chart?t=' + data.searchResult[0].Title);
-
   if (data.notFound) {
-    return <h1>Bulunamadi</h1>;
+    return (
+      <>
+        <Header></Header>
+        <h1>bulunamadiiiiiiiii</h1>
+      </>
+    );
   }
+
+  if (data.searchResult.length === 1) router.push('/chart/' + data.searchResult[0].Title);
   console.log(data.searchResult);
   return (
     <div className='container'>
@@ -23,7 +28,7 @@ export default function SearchPage() {
         {data.searchResult.map((e) => {
           return (
             <li key={e.imdbID}>
-              <Link href={`/chart?t=${e.Title}`}>
+              <Link href={`/chart/${e.Title}`}>
                 <img src={e.Poster}></img>
               </Link>
             </li>

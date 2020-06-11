@@ -22,7 +22,7 @@ function Search({ styleName, positionTop, refresh }) {
     if (searchTerm.length < 1) {
       return;
     }
-    router.push('/search?s=' + searchTerm);
+    router.push('/search/' + searchTerm);
   }
 
   return (
