@@ -18,7 +18,7 @@ export default function Suggestions({ array, positionTop = null, refresh = false
               event.currentTarget.previousSibling?.firstChild?.focus();
             }
           }}>
-          <Link href={`/chart/${e}`}>
+          <Link href={`/chart/${e}`} prefetch={false}>
             <a className='link'>{e}</a>
           </Link>
         </li>
