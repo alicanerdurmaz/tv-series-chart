@@ -5,7 +5,7 @@ import ChangeScale from './ChangeScale';
 
 const Chart = React.memo(function Chart({ seasonData }) {
   const [selectedSeason, setSelectedSeason] = useState(0);
-  const [scale, setScale] = useState(true);
+  const [scale, setScale] = useState(false);
 
   function calculateLeft() {
     return scale ? -20 : -30;
