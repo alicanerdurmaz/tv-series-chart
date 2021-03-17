@@ -1,27 +1,29 @@
-import React from 'react';
-import useFetch from '../../components/helpers/useFetch';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Header from '../../components/Header';
-import Spinner from '../../components/Spinner';
+import React from "react";
+import useFetch from "../../components/helpers/useFetch";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Header from "../../components/Header";
+import Spinner from "../../components/Spinner";
+import NotFoundSvg from "../../components/NotFoundSvg";
 
 export default function SearchPage() {
   const router = useRouter();
-  const { data } = useFetch('/api/search?s=');
+  const { data } = useFetch("/api/search?s=");
 
   if (data?.notFound) {
     return (
       <>
         <Header></Header>
-        <h1>bulunamadiiiiiiiii</h1>
+        <NotFoundSvg />
       </>
     );
   }
 
-  if (data?.searchResult.length === 1) router.push('/chart/' + data.searchResult[0].Title);
+  if (data?.searchResult.length === 1)
+    router.push("/chart/" + data.searchResult[0].Title);
 
   return (
-    <div className='container'>
+    <div className="container">
       <Header></Header>
       {data ? (
         <ul>
